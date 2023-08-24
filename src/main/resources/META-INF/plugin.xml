@@ -1,0 +1,56 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.zhipin.diamond</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>zhipin-diamond</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="yinnan@kanzhun.com" url="https://www.zhipin.com">Boss直聘</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+     Diamond java class file hot swap by Boss Zhipin <br>
+     you can use it to hot reload java class without restart server <br>
+    Boss 直聘 Diamond 热更新插件 <br>
+    你可以使用此插件对服务上正在运行的 server 在不重启的前提下完成 java class 热重载
+  ]]></description>
+
+    <idea-version since-build="201.0"/>
+
+    <change-notes><![CDATA[
+        <ul>
+            <li>修改jdk版本为11</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable groupId="tools"
+                                 instance="com.zhipin.diamond.config.PluginConfig" nonDefaultProject="true"/>
+        <notificationGroup id="hotfix" displayType="BALLOON"/>
+    </extensions>
+
+    <project-components>
+        <component>
+            <implementation-class>com.zhipin.diamond.component.SettingStorage</implementation-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <group id="hotReloadGroup" class="com.zhipin.diamond.action.HotReloadActionGroup" text="Hot Reload"
+                description="Hot reload" popup="true" >
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </group>
+    </actions>
+</idea-plugin>
