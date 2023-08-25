@@ -7,10 +7,13 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.zhipin.diamond.component.ServerUrlSettingStorage.DEFAULT_SERVER_URL;
 import static com.zhipin.diamond.utils.Constants.NEED_SELECT_APPLICATION;
 import static com.zhipin.diamond.utils.ReloadUtil.getApplicationList;
 import static java.util.stream.Collectors.toList;
@@ -29,6 +32,7 @@ public class SettingPanel {
 
     private JComboBox<String> applicationNameBox;
     private JButton reset;
+    private JTextField serverUrlField;
 
     public SettingPanel(Project project) {
         this.project = project;
@@ -48,6 +52,7 @@ public class SettingPanel {
     }
 
     public void setData() {
+        serverUrlField.setText(ServerUrlSettingStorage.getServerUrl());
         ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
         resetDate(applicationConfig.getApplicationNameKeyword());
         if (StringUtils.isNotBlank(applicationConfig.getSelectedApplicationName())) {
@@ -56,6 +61,7 @@ public class SettingPanel {
     }
 
     public void getData() {
+        ServerUrlSettingStorage.setServerUrl(serverUrlField.getText());
         ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
         if (applicationNameBox.getSelectedItem() != null) {
             applicationConfig.setSelectedApplicationName((String) applicationNameBox.getSelectedItem());
@@ -68,6 +74,7 @@ public class SettingPanel {
             ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
             checkArgument(Objects.equals(applicationNameBox.getSelectedItem(), applicationConfig.getSelectedApplicationName()));
             checkArgument(Objects.equals(applicationNameKeywordField.getText(), applicationConfig.getApplicationNameKeyword()));
+            checkArgument(Objects.equals(serverUrlField.getText(), ServerUrlSettingStorage.getServerUrl()));
             return false;
         } catch (Exception e) {
             return true;
@@ -75,8 +82,28 @@ public class SettingPanel {
     }
 
     public void initComponent() {
+        addServerFocusListener();
         addApplicationNameChangeListener();
         addRestListener();
+    }
+
+    private void addServerFocusListener() {
+        serverUrlField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // do nothing
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                String serverUrl = serverUrlField.getText();
+                if (StringUtils.isEmpty(serverUrl)) {
+                    return;
+                }
+                ServerUrlSettingStorage.setServerUrl(serverUrlField.getText());
+                fillApplicationBox();
+            }
+        });
     }
 
 
@@ -102,6 +129,7 @@ public class SettingPanel {
 
     private void addRestListener() {
         reset.addActionListener(e -> {
+            ServerUrlSettingStorage.setServerUrl(DEFAULT_SERVER_URL);
             resetDate("");
         });
     }
@@ -115,6 +143,9 @@ public class SettingPanel {
     private void fillApplicationBox() {
         List<String> applicationNameList = getApplicationList();
         if (isEmpty(applicationNameList)) {
+            applicationNameBox.removeAllItems();
+            applicationNameBox.addItem(NEED_SELECT_APPLICATION);
+            applicationNameBox.setSelectedIndex(0);
             return;
         }
         applicationNameBox.removeAllItems();

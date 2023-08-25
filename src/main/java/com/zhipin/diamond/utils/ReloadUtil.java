@@ -2,6 +2,7 @@ package com.zhipin.diamond.utils;
 
 import static com.zhipin.diamond.utils.Constants.DEFAULT_HOST;
 import static com.zhipin.diamond.utils.Constants.DEFAULT_PROTOCOL;
+import static java.util.Collections.EMPTY_LIST;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -76,7 +77,7 @@ public class ReloadUtil {
                     .map(list -> list.stream().sorted().collect(Collectors.toList()))
                     .orElse(emptyList());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return emptyList();
         }
     }
 

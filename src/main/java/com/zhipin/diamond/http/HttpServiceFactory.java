@@ -6,6 +6,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.concurrent.TimeUnit;
 
+import com.zhipin.diamond.component.ServerUrlSettingStorage;
 import org.apache.commons.lang3.StringUtils;
 
 import okhttp3.OkHttpClient;
@@ -20,25 +21,12 @@ public class HttpServiceFactory {
 
     private static final String SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
 
-    private static final HttpService httpService;
+    private static HttpService httpService;
 
-    static {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(false)
-                .build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(SERVER_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
-        httpService = retrofit.create(HttpService.class);
-    }
+
 
     public static HttpService getInstance() {
-        checkNotNull(httpService);
+        trySetServer(ServerUrlSettingStorage.getServerUrl());
         return httpService;
     }
 
@@ -52,6 +40,23 @@ public class HttpServiceFactory {
     }
 
     public static void setServer(String serverUrl) {
+        checkNotNull(serverUrl);
+        if (!hasProtocol(serverUrl)) {
+            serverUrl = DEFAULT_PROTOCOL + serverUrl;
+        }
+        // todo: 如果域名不合法，DNS查找时间较长，后面看看怎么优化一下
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(false)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+        httpService = retrofit.create(HttpService.class);
     }
 
     private static boolean hasProtocol(String url) {

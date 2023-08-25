@@ -51,9 +51,7 @@ public class HotReloadActionGroup extends ActionGroup {
                     .collect(toList());
         }
         if (CollectionUtils.isEmpty(applicationNameList)) {
-            ApplicationManager.getApplication().invokeLater(
-                    () -> ShowSettingsUtil.getInstance().showSettingsDialog(project, PluginConfig.class));
-
+            return new AnAction[]{SHOW_CONFIG_ACTION};
         }
         if (isNotBlank(applicationConfig.getSelectedApplicationName())) {
             Comparator<String> lastSelectedComparator = Comparator.comparing(app -> applicationConfig.getSelectedApplicationName().equalsIgnoreCase(app), Comparator.reverseOrder());
@@ -93,7 +91,7 @@ public class HotReloadActionGroup extends ActionGroup {
     public static final class ShowConfigAction extends AnAction {
 
         public ShowConfigAction() {
-            super("Application Is Empty,Please Check ApplicationNameKeyword");
+            super("Application Is Empty,Please Check ServerUrl or ApplicationNameKeyword");
         }
 
         @Override
