@@ -183,7 +183,7 @@
       <workItem from="1692865997960" duration="1315000" />
       <workItem from="1692868337408" duration="45000" />
       <workItem from="1692868411069" duration="37000" />
-      <workItem from="1692925135430" duration="6029000" />
+      <workItem from="1692925135430" duration="6970000" />
     </task>
     <servers />
   </component>
@@ -194,19 +194,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java</url>
-          <line>99</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java</url>
           <line>28</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

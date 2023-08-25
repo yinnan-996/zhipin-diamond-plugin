@@ -27,7 +27,8 @@
 
     <change-notes><![CDATA[
         <ul>
-            <li>修改jdk版本为11</li>
+            <li>添加ServerUrl配置</li>
+            <li>修复右键报错的问题</li>
         </ul>
     ]]></change-notes>
 
