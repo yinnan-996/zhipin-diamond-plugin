@@ -27,8 +27,7 @@
 
     <change-notes><![CDATA[
         <ul>
-            <li>添加ServerUrl配置</li>
-            <li>修复右键报错的问题</li>
+            <li>修正setting页面Label字段太宽的问题</li>
         </ul>
     ]]></change-notes>
 

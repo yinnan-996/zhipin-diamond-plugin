@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +44,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature-1.5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +78,7 @@
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "346",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "602",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-1.5",
+    "git-widget-placeholder": "feature-1.6",
     "last_opened_file_path": "/Users/admin/work/gitHub/zhipin-diamond-plugin",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -107,7 +97,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Plugin">
+  <component name="RunManager" selected="Gradle.zhipin-diamond-plugin [buildPlugin]">
     <configuration name="zhipin-diamond-plugin [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -183,7 +173,7 @@
       <workItem from="1692865997960" duration="1315000" />
       <workItem from="1692868337408" duration="45000" />
       <workItem from="1692868411069" duration="37000" />
-      <workItem from="1692925135430" duration="6970000" />
+      <workItem from="1692925135430" duration="7983000" />
     </task>
     <servers />
   </component>
