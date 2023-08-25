@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +44,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -46,6 +58,13 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -65,6 +84,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "346",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "602",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "feature-1.5",
     "last_opened_file_path": "/Users/admin/work/gitHub/zhipin-diamond-plugin",
@@ -85,7 +107,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.zhipin-diamond-plugin [buildPlugin]">
+  <component name="RunManager" selected="Gradle.Run Plugin">
     <configuration name="zhipin-diamond-plugin [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -161,11 +183,32 @@
       <workItem from="1692865997960" duration="1315000" />
       <workItem from="1692868337408" duration="45000" />
       <workItem from="1692868411069" duration="37000" />
-      <workItem from="1692925135430" duration="285000" />
+      <workItem from="1692925135430" duration="6029000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadActionGroup.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
