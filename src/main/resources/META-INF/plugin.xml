@@ -16,8 +16,11 @@
     <description><![CDATA[
      Diamond java class file hot swap by Boss Zhipin <br>
      you can use it to hot reload java class without restart server <br>
-    Boss 直聘 Diamond 热更新插件 <br>
-    你可以使用此插件对服务上正在运行的 server 在不重启的前提下完成 java class 热重载
+     How to use:
+     You can right-click and select the application you want to update on the Hot Reload submenu, then wait for a few seconds, and the application will complete the hot update<br>
+     Boss 直聘 Diamond 热更新插件 <br>
+     你可以使用此插件对服务上正在运行的 server 在不重启的前提下完成 java class 热重载<br>
+     使用方式：你可以鼠标右键并且在 Hot Reload子菜单上选择你要热更新的应用，然后等待几秒，应用就完成了热更新
   ]]></description>
 
     <idea-version since-build="201.0"/>
@@ -37,7 +40,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable groupId="tools"
-                                 instance="com.zhipin.diamond.config.PluginConfig" nonDefaultProject="true"/>
+                             instance="com.zhipin.diamond.config.PluginConfig" nonDefaultProject="true"/>
         <notificationGroup id="hotfix" displayType="BALLOON"/>
     </extensions>
 
@@ -49,7 +52,7 @@
 
     <actions>
         <group id="hotReloadGroup" class="com.zhipin.diamond.action.HotReloadActionGroup" text="Hot Reload"
-                description="Hot reload" popup="true" >
+               description="Hot reload" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
     </actions>
