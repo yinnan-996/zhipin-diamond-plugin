@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpServiceFactory {
 
-    private static final String SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
+    private static final String SERVER_URL = "";
 
     private static HttpService httpService;
 
