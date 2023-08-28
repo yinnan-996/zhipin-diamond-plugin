@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +181,8 @@
       <workItem from="1692957012090" duration="412000" />
       <workItem from="1692958367849" duration="26000" />
       <workItem from="1693186312587" duration="460000" />
+      <workItem from="1693187760227" duration="57000" />
+      <workItem from="1693188841783" duration="30000" />
     </task>
     <servers />
   </component>
