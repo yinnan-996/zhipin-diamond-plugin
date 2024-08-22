@@ -17,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 @State(name = "DiamondServerPluginConfiguration", storages = {@Storage("diamondServerPlugin.xml")})
 public class ServerUrlSettingStorage implements PersistentStateComponent<String> {
 
-    private static String SERVER_URL = "";
-    public static String DEFAULT_SERVER_URL = "";
+    private static String SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
+    public static String DEFAULT_SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
     @Override
     public @Nullable String getState() {
         return SERVER_URL;

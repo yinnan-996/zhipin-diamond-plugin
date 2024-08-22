@@ -6,6 +6,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileScope;
 import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -39,6 +40,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.junit.rules.Stopwatch;
 import retrofit2.Call;
 
 import java.io.IOException;
@@ -184,7 +186,7 @@ public class HotFixActionUtils {
     }
 
     private static void startReloadTask(Project project, VirtualFile file, String applicationName) {
-        ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Class") {
+        ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Class" + file.getName()) {
             @Override
             public void run(@NotNull ProgressIndicator indicator) {
                 try {
@@ -246,6 +248,56 @@ public class HotFixActionUtils {
         ApplicationManager.getApplication().invokeLater(
                 () -> ShowSettingsUtil.getInstance().showSettingsDialog(project, PluginConfig.class));
         throw new RuntimeException(errorMsg);
+    }
+
+    public static void handleHotfixSourceAction(Project project, VirtualFile virtualFile, String applicationName) {
+        logger.info("Reload Source action performed");
+        if (project == null || virtualFile == null || applicationName == null) {
+            return;
+        }
+
+
+        PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
+        if (psiFile instanceof PsiClassOwner) {
+            if ("class".equals(virtualFile.getExtension())) {
+                reloadClassFile(project, virtualFile, applicationName);
+            } else if (!virtualFile.isInLocalFileSystem() && !virtualFile.isWritable()) {
+                // source file in a library
+            } else {
+                Application application = ApplicationManager.getApplication();
+                application.runWriteAction(() -> FileDocumentManager.getInstance().saveAllDocuments());
+                Document currentDoc = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
+                VirtualFile currentFile = FileDocumentManager.getInstance().getFile(currentDoc);
+                reloadSourceFile(project, currentFile, applicationName);
+            }
+        }
+    }
+
+    private static void reloadSourceFile(final Project project, final VirtualFile file, String applicationName) {
+        log("Sync Source " + project + ' ' + file);
+        if (file == null) {
+            return;
+        }
+        Application application = ApplicationManager.getApplication();
+        application.invokeLater(() -> file.refresh(false, false,
+                () -> startReloadSourceTask(project, file, applicationName)));
+    }
+
+
+    private static void startReloadSourceTask(Project project, VirtualFile file, String applicationName) {
+        ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Source "  + file.getName()) {
+            long timeMillis = System.currentTimeMillis();
+            @Override
+            public void run(@NotNull ProgressIndicator indicator) {
+                try {
+                    uploadAndReloadClass(project, file, applicationName);
+                    notifySuccess();
+                } catch (Exception e) {
+                    notifyFailed(e.getMessage());
+                    log(e.getMessage(), e);
+                }
+            }
+        });
     }
 
     private static void log(String message) {

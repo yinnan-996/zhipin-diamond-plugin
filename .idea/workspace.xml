@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action/HotReloadSourceActionGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/diamondPlugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/diamondPlugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/http/HttpServiceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/HotFixActionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/HotFixActionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/ReloadUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +40,17 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zhipin-diamond" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zhipin-diamond" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -51,6 +71,12 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.15.0/c364af4905705d50cc2921a586393b620fe1c0a1/gradle-intellij-plugin-1.15.0-sources.jar!/org/jetbrains/intellij/utils/LatestVersionResolver.kt" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/core-api/src/main/java/org/gradle/api/artifacts/dsl/RepositoryHandler.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/dependency-management/src/main/java/org/gradle/api/internal/artifacts/BaseRepositoryFactory.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/dependency-management/src/main/java/org/gradle/api/internal/artifacts/dsl/DefaultRepositoryHandler.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -75,34 +101,67 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Gradle.Run Plugin.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.zhipin-diamond-plugin [buildPlugin].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.zhipin-diamond-plugin [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.zhipin-diamond-plugin [init].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.zhipin-diamond-plugin [runIde].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.zhipin-diamond-plugin [setupDependencies].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;346&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;336&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;feature-1.7&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/admin/work/gitHub/zhipin-diamond-plugin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.zhipin.diamond.config.PluginConfig&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/action" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.zhipin.diamond.action" />
+      <recent name="com.zhipin.diamond.utils" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.zhipin-diamond-plugin [buildPlugin]">
     <configuration name="zhipin-diamond-plugin [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--stacktrace" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildPlugin" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="zhipin-diamond-plugin [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -113,7 +172,29 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="buildPlugin" />
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="zhipin-diamond-plugin [init]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="init" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -159,12 +240,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.Run Plugin" />
+      <item itemvalue="Gradle.zhipin-diamond-plugin [init]" />
+      <item itemvalue="Gradle.zhipin-diamond-plugin [clean]" />
+      <item itemvalue="Gradle.zhipin-diamond-plugin [buildPlugin]" />
+      <item itemvalue="Gradle.zhipin-diamond-plugin [runIde]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.zhipin-diamond-plugin [buildPlugin]" />
         <item itemvalue="Gradle.zhipin-diamond-plugin [runIde]" />
+        <item itemvalue="Gradle.zhipin-diamond-plugin [init]" />
+        <item itemvalue="Gradle.zhipin-diamond-plugin [clean]" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-18.0.2-corretto-18.0.2-f644763e9732-56b8144a" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -182,7 +279,34 @@
       <workItem from="1692958367849" duration="26000" />
       <workItem from="1693186312587" duration="460000" />
       <workItem from="1693187760227" duration="57000" />
-      <workItem from="1693188841783" duration="30000" />
+      <workItem from="1693188841783" duration="1690000" />
+      <workItem from="1693274125873" duration="865000" />
+      <workItem from="1693916975694" duration="1490000" />
+      <workItem from="1694001669855" duration="3695000" />
+      <workItem from="1694049027312" duration="28000" />
+      <workItem from="1694049233432" duration="77000" />
+      <workItem from="1694049638334" duration="598000" />
+      <workItem from="1694769747465" duration="2211000" />
+      <workItem from="1694791971984" duration="3213000" />
+      <workItem from="1695002373027" duration="280000" />
+      <workItem from="1695002858241" duration="81000" />
+      <workItem from="1695108469372" duration="636000" />
+      <workItem from="1697187633039" duration="869000" />
+      <workItem from="1697189525482" duration="2277000" />
+      <workItem from="1700796823158" duration="4948000" />
+      <workItem from="1702378407152" duration="11991000" />
+      <workItem from="1702462169068" duration="722000" />
+      <workItem from="1705497144791" duration="136000" />
+      <workItem from="1705497291913" duration="145000" />
+      <workItem from="1705541403124" duration="4655000" />
+      <workItem from="1705546772824" duration="5416000" />
+      <workItem from="1715826336808" duration="464000" />
+      <workItem from="1719212473641" duration="1742000" />
+      <workItem from="1719218164446" duration="3933000" />
+      <workItem from="1719829210724" duration="1002000" />
+      <workItem from="1719830230044" duration="1631000" />
+      <workItem from="1719968421160" duration="598000" />
+      <workItem from="1724293662655" duration="4469000" />
     </task>
     <servers />
   </component>
@@ -198,11 +322,47 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/ServerUrlSettingStorage.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="14" />
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2020.1.1/640aff4c23a001e5595ee654670d774e9efcd118/ideaIC-2020.1.1/lib/util.jar!/com/intellij/jna/JnaLoader.class</url>
+          <line>35</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2020.1.1/640aff4c23a001e5595ee654670d774e9efcd118/ideaIC-2020.1.1/lib/platform-api.jar!/com/intellij/ui/components/MacScrollBarUI.class</url>
+          <line>132</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2020.1.1/640aff4c23a001e5595ee654670d774e9efcd118/ideaIC-2020.1.1/lib/platform-api.jar!/com/intellij/ui/components/MacScrollBarUI.class</url>
+          <line>221</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/HotFixActionUtils.java</url>
+          <line>63</line>
+          <properties class="com.zhipin.diamond.utils.HotFixActionUtils" method="handleHotfixAction">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.15.0/c364af4905705d50cc2921a586393b620fe1c0a1/gradle-intellij-plugin-1.15.0-sources.jar!/org/jetbrains/intellij/utils/LatestVersionResolver.kt</url>
+          <line>23</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
+          <option name="timeStamp" value="17" />
+        </breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.UnsatisfiedLinkError" package="java.lang" />
+          <option name="timeStamp" value="19" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

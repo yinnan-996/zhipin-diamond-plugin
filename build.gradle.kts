@@ -1,12 +1,12 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    id("org.jetbrains.intellij") version "1.15.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
+    id("org.jetbrains.intellij") version "1.16.1"
     id("io.freefair.lombok") version "8.2.2"
 }
 
 group = "com.zhipin"
-version = "1.7"
+version = "1.9"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2020.1.1")
+    version.set("2020.3.1")
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf("com.intellij.java"))
@@ -44,8 +44,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("201.0")
-        untilBuild.set("232.*")
+        sinceBuild.set("193")
+        untilBuild.set("241.*")
     }
 
     signPlugin {
