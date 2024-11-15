@@ -1,28 +1,5 @@
 package com.zhipin.diamond.utils;
 
-import static com.zhipin.diamond.utils.Constants.DEFAULT_HOST;
-import static com.zhipin.diamond.utils.Constants.DEFAULT_PROTOCOL;
-import static java.util.Collections.EMPTY_LIST;
-import static java.util.Collections.emptyList;
-import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.NotificationGroup;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import com.zhipin.diamond.http.HttpService;
-import com.zhipin.diamond.http.HttpServiceFactory;
-import com.zhipin.diamond.model.JvmProcess;
-import com.zhipin.diamond.model.Result;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -30,6 +7,32 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.ui.popup.Balloon;
+import com.zhipin.diamond.config.ApplicationConfig;
+import com.zhipin.diamond.http.HttpService;
+import com.zhipin.diamond.http.HttpServiceFactory;
+import com.zhipin.diamond.model.ApplicationInfo;
+import com.zhipin.diamond.model.JvmProcess;
+import com.zhipin.diamond.model.Result;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.zhipin.diamond.constants.DiamondConstants.DEFAULT_HOST;
+import static com.zhipin.diamond.constants.DiamondConstants.DEFAULT_PROTOCOL;
+import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * @author yinnan@kanzhun.com
@@ -81,6 +84,57 @@ public class ReloadUtil {
         } catch (IOException e) {
             return emptyList();
         }
+    }
+
+    public static List<ApplicationInfo> getApplicationInfoList() {
+        HttpService httpService = HttpServiceFactory.getInstance();
+        try {
+            Result<List<ApplicationInfo>> result = httpService.applicationInfoList().execute().body();
+            return ofNullable(result)
+                    .map(Result::getData)
+                    .map(list -> list.stream().sorted(Comparator.comparing(ApplicationInfo::getApplicationName)).collect(Collectors.toList()))
+                    .orElse(emptyList());
+        } catch (IOException e) {
+            return emptyList();
+        }
+    }
+
+    public static List<ApplicationInfo> filterApplicationInfoList(ApplicationConfig applicationConfig) {
+        List<ApplicationInfo> applicationInfoList = getApplicationInfoList();
+        if (isEmpty(applicationInfoList)) {
+            return emptyList();
+        }
+
+        Set<String> applicationNameSet = new HashSet<>();
+        applicationInfoList = applicationInfoList.stream()
+                .filter(applicationInfo -> filterApplicationInfo(applicationInfo, applicationConfig))
+                .filter(applicationInfo -> applicationNameSet.add(applicationInfo.getApplicationName()))
+                .collect(toList());
+        if (isNotBlank(applicationConfig.getSelectedApplicationName())) {
+            Comparator<ApplicationInfo> lastSelectedComparator =
+                    Comparator.comparing(applicationInfo -> applicationConfig.getSelectedApplicationName().equalsIgnoreCase(applicationInfo.getApplicationName()), Comparator.reverseOrder());
+            applicationInfoList.sort(lastSelectedComparator);
+        }
+        return applicationInfoList;
+    }
+
+    public static boolean filterApplicationInfo(final ApplicationInfo applicationInfo, ApplicationConfig applicationConfig) {
+        if (Objects.isNull(applicationInfo)) {
+            return true;
+        }
+        String applicationNameKeyword = applicationConfig.getApplicationNameKeyword();
+        if (StringUtils.isBlank(applicationNameKeyword)) {
+            return true;
+        }
+        String lowerCase = applicationNameKeyword.toLowerCase();
+        String applicationNameLowerCase = applicationInfo.getApplicationName().toLowerCase();
+        if (!applicationNameLowerCase.contains(lowerCase)) {
+            return false;
+        }
+        if (StringUtils.isNotBlank(applicationConfig.calculateGroupName())) {
+            return applicationInfo.getGroup().toLowerCase().contains(applicationConfig.getGroupName().toLowerCase());
+        }
+        return true;
     }
 
 

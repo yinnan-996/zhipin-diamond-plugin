@@ -1,14 +1,13 @@
 package com.zhipin.diamond.model;
 
-import static org.apache.commons.lang3.ObjectUtils.firstNonNull;
-
-import java.util.List;
-
 import com.google.common.base.Objects;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+import static org.apache.commons.lang3.ObjectUtils.firstNonNull;
 
 /**
  * @author yinnan@kanzhun.com

@@ -4,8 +4,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.options.Configurable.VariableProjectAppLevel;
-import com.zhipin.diamond.config.ApplicationConfig;
 import com.zhipin.diamond.http.HttpServiceFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,6 +17,7 @@ public class ServerUrlSettingStorage implements PersistentStateComponent<String>
 
     private static String SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
     public static String DEFAULT_SERVER_URL = "https://diamond-web-qa.weizhipin.com/";
+
     @Override
     public @Nullable String getState() {
         return SERVER_URL;
@@ -33,7 +32,6 @@ public class ServerUrlSettingStorage implements PersistentStateComponent<String>
     public static ServerUrlSettingStorage getInstance() {
         return ApplicationManager.getApplication().getComponent(ServerUrlSettingStorage.class);
     }
-
 
 
     public static String getServerUrl() {

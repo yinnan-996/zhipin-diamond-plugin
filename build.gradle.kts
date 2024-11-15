@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.zhipin"
-version = "1.9"
+version = "2.1"
 
 repositories {
     mavenCentral()
@@ -45,7 +45,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("193")
-        untilBuild.set("241.*")
+        untilBuild.set("243.*")
     }
 
     signPlugin {

@@ -1,11 +1,9 @@
 package com.zhipin.diamond.http;
 
-import java.util.List;
-
+import com.zhipin.diamond.model.ApplicationInfo;
 import com.zhipin.diamond.model.HotfixResult;
 import com.zhipin.diamond.model.JvmProcess;
 import com.zhipin.diamond.model.Result;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -14,6 +12,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+
+import java.util.List;
 
 /**
  * @author yinnan@kanzhun.com
@@ -35,9 +35,12 @@ public interface HttpService {
     @GET("/applicationList")
     Call<Result<List<String>>> applicationList();
 
+    @GET("/applicationInfoList")
+    Call<Result<List<ApplicationInfo>>> applicationInfoList();
 
 
     @Multipart
     @POST("/containerHotfix")
-    Call<Result<HotfixResult>> reloadContainerClass(@Part MultipartBody.Part file, @Part("applicationName") RequestBody applicationName);
+    Call<Result<HotfixResult>> reloadContainerClass(@Part MultipartBody.Part file, @Part("applicationName") RequestBody applicationName
+            , @Part("group") RequestBody group);
 }

@@ -1,17 +1,16 @@
 package com.zhipin.diamond.http;
 
-import static com.zhipin.diamond.utils.Constants.DEFAULT_PROTOCOL;
-import static com.zhipin.diamond.utils.Constants.PROTOCOL_PREFIX;
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.zhipin.diamond.component.ServerUrlSettingStorage;
+import okhttp3.OkHttpClient;
+import org.apache.commons.lang3.StringUtils;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import com.zhipin.diamond.component.ServerUrlSettingStorage;
-import org.apache.commons.lang3.StringUtils;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.zhipin.diamond.constants.DiamondConstants.DEFAULT_PROTOCOL;
+import static com.zhipin.diamond.constants.DiamondConstants.PROTOCOL_PREFIX;
 
 /**
  * @author yinnan@kanzhun.com
@@ -22,7 +21,6 @@ public class HttpServiceFactory {
     private static final String SERVER_URL = "";
 
     private static HttpService httpService;
-
 
 
     public static HttpService getInstance() {

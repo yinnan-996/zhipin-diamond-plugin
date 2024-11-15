@@ -2,7 +2,9 @@ package com.zhipin.diamond.component;
 
 import com.intellij.openapi.project.Project;
 import com.zhipin.diamond.config.ApplicationConfig;
+import com.zhipin.diamond.model.ApplicationInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,11 +16,10 @@ import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.zhipin.diamond.component.ServerUrlSettingStorage.DEFAULT_SERVER_URL;
-import static com.zhipin.diamond.utils.Constants.NEED_SELECT_APPLICATION;
-import static com.zhipin.diamond.utils.ReloadUtil.getApplicationList;
-import static java.util.stream.Collectors.toList;
+import static com.zhipin.diamond.constants.DiamondConstants.EMPTY_APPLICATION_LIST_TXT;
+import static com.zhipin.diamond.utils.ReloadUtil.filterApplicationInfoList;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * @author yinnan@kanzhun.com
@@ -33,6 +34,11 @@ public class SettingPanel {
     private JComboBox<String> applicationNameBox;
     private JButton reset;
     private JTextField serverUrlField;
+    private JComboBox<Boolean> enableGroupBox;
+    private JLabel groupNameLabel;
+    private JTextField groupNameField;
+    private JComboBox<Boolean> disableLocalCompileBox;
+
 
     public SettingPanel(Project project) {
         this.project = project;
@@ -54,10 +60,11 @@ public class SettingPanel {
     public void setData() {
         serverUrlField.setText(ServerUrlSettingStorage.getServerUrl());
         ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
-        resetDate(applicationConfig.getApplicationNameKeyword());
+        resetDate(applicationConfig);
         if (StringUtils.isNotBlank(applicationConfig.getSelectedApplicationName())) {
             applicationNameBox.setSelectedItem(applicationConfig.getSelectedApplicationName());
         }
+        applicationNameBox.setSelectedItem(applicationConfig.isEnableGroup());
     }
 
     public void getData() {
@@ -67,6 +74,9 @@ public class SettingPanel {
             applicationConfig.setSelectedApplicationName((String) applicationNameBox.getSelectedItem());
         }
         applicationConfig.setApplicationNameKeyword(applicationNameKeywordField.getText());
+        applicationConfig.setEnableGroup((Boolean) ofNullable(enableGroupBox.getSelectedItem()).orElse(false));
+        applicationConfig.setDisableLocalCompile((Boolean) ofNullable(disableLocalCompileBox.getSelectedItem()).orElse(false));
+        applicationConfig.setGroupName(groupNameField.getText());
     }
 
     public boolean isModifiable() {
@@ -74,7 +84,9 @@ public class SettingPanel {
             ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
             checkArgument(Objects.equals(applicationNameBox.getSelectedItem(), applicationConfig.getSelectedApplicationName()));
             checkArgument(Objects.equals(applicationNameKeywordField.getText(), applicationConfig.getApplicationNameKeyword()));
-            checkArgument(Objects.equals(serverUrlField.getText(), ServerUrlSettingStorage.getServerUrl()));
+            checkArgument(Objects.equals(enableGroupBox.getSelectedItem(), applicationConfig.isEnableGroup()));
+            checkArgument(Objects.equals(disableLocalCompileBox.getSelectedItem(), applicationConfig.isDisableLocalCompile()));
+            checkArgument(Objects.equals(groupNameField.getText(), applicationConfig.getGroupName()));
             return false;
         } catch (Exception e) {
             return true;
@@ -85,7 +97,11 @@ public class SettingPanel {
         addServerFocusListener();
         addApplicationNameChangeListener();
         addRestListener();
+        addGroupListener();
+        addDisableLocalCompileListener();
+        fillApplicationBox();
     }
+
 
     private void addServerFocusListener() {
         serverUrlField.addFocusListener(new FocusListener() {
@@ -108,7 +124,44 @@ public class SettingPanel {
 
 
     private void addApplicationNameChangeListener() {
-        applicationNameKeywordField.getDocument().addDocumentListener(new DocumentListener() {
+        applicationNameKeywordField.getDocument().addDocumentListener(getDocumentListener());
+    }
+
+    private void addRestListener() {
+        reset.addActionListener(e -> {
+            ServerUrlSettingStorage.setServerUrl(DEFAULT_SERVER_URL);
+            resetDate(new ApplicationConfig());
+        });
+    }
+
+
+    private void addGroupListener() {
+        if (enableGroupBox.getItemCount() < 1) {
+            enableGroupBox.addItem(Boolean.FALSE);
+            enableGroupBox.addItem(Boolean.TRUE);
+            enableGroupBox.setSelectedIndex(0);
+        }
+        enableGroupBox.addItemListener(e -> {
+            if (Objects.equals(e.getItem(), false)) {
+                groupNameField.setText("");
+            }
+            groupNameLabel.setEnabled(Objects.equals(enableGroupBox.getSelectedItem(), true));
+            groupNameField.setEnabled(Objects.equals(enableGroupBox.getSelectedItem(), true));
+            groupNameField.setEditable(Objects.equals(enableGroupBox.getSelectedItem(), true));
+        });
+        groupNameField.getDocument().addDocumentListener(getDocumentListener());
+    }
+
+    private void addDisableLocalCompileListener() {
+        if (disableLocalCompileBox.getItemCount() < 1) {
+            disableLocalCompileBox.addItem(Boolean.FALSE);
+            disableLocalCompileBox.addItem(Boolean.TRUE);
+            disableLocalCompileBox.setSelectedIndex(0);
+        }
+    }
+
+    private @NotNull DocumentListener getDocumentListener() {
+        return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 fillApplicationBox();
@@ -123,48 +176,44 @@ public class SettingPanel {
             public void changedUpdate(DocumentEvent e) {
                 fillApplicationBox();
             }
-        });
-        fillApplicationBox();
+        };
     }
 
-    private void addRestListener() {
-        reset.addActionListener(e -> {
-            ServerUrlSettingStorage.setServerUrl(DEFAULT_SERVER_URL);
-            resetDate("");
-        });
-    }
-
-    public void resetDate(String t) {
-        applicationNameKeywordField.setText(t);
+    public void resetDate(ApplicationConfig applicationConfig) {
+        applicationNameKeywordField.setText(StringUtils.isNotBlank(applicationConfig.getApplicationNameKeyword())
+                ? applicationConfig.getApplicationNameKeyword()
+                : "");
+        enableGroupBox.setSelectedItem(applicationConfig.isEnableGroup());
+        disableLocalCompileBox.setSelectedItem(applicationConfig.isDisableLocalCompile());
+        groupNameField.setText(StringUtils.isNotBlank(applicationConfig.getGroupName())
+                ? applicationConfig.getGroupName()
+                : "");
         fillApplicationBox();
     }
 
 
     private void fillApplicationBox() {
-        List<String> applicationNameList = getApplicationList();
-        if (isEmpty(applicationNameList)) {
+        ApplicationConfig applicationConfig = new ApplicationConfig();
+        applicationConfig.setApplicationNameKeyword(applicationNameKeywordField.getText().toLowerCase());
+        applicationConfig.setEnableGroup(Objects.equals(Boolean.TRUE, enableGroupBox.getSelectedItem()));
+        applicationConfig.setDisableLocalCompile(Objects.equals(Boolean.TRUE, disableLocalCompileBox.getSelectedItem()));
+        applicationConfig.setGroupName(groupNameField.getText().toLowerCase());
+        List<ApplicationInfo> filterApplicationList = filterApplicationInfoList(applicationConfig);
+        if (isEmpty(filterApplicationList)) {
             applicationNameBox.removeAllItems();
-            applicationNameBox.addItem(NEED_SELECT_APPLICATION);
+            applicationNameBox.addItem(EMPTY_APPLICATION_LIST_TXT);
             applicationNameBox.setSelectedIndex(0);
             return;
         }
         applicationNameBox.removeAllItems();
-        String applicationText = applicationNameKeywordField.getText().toLowerCase();
-        if (isNotBlank(applicationText)) {
-            List<String> filterApplicationList = applicationNameList.stream()
-                    .filter(application -> application.toLowerCase().contains(applicationText))
-                    .collect(toList());
-            if (isEmpty(filterApplicationList)) {
-                applicationNameBox.addItem(NEED_SELECT_APPLICATION);
-                applicationNameBox.setSelectedIndex(0);
-            } else {
-                filterApplicationList.forEach(applicationNameBox::addItem);
-            }
-            return;
+        if (isEmpty(filterApplicationList)) {
+            applicationNameBox.addItem(EMPTY_APPLICATION_LIST_TXT);
+            applicationNameBox.setSelectedIndex(0);
+        } else {
+            filterApplicationList.stream().map(ApplicationInfo::getApplicationName).forEach(applicationNameBox::addItem);
         }
-        applicationNameBox.addItem(NEED_SELECT_APPLICATION);
+        applicationNameBox.addItem(EMPTY_APPLICATION_LIST_TXT);
         applicationNameBox.setSelectedIndex(0);
-        applicationNameList.forEach(applicationNameBox::addItem);
     }
 
 }

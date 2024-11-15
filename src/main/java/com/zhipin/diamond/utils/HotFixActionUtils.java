@@ -28,11 +28,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.zhipin.diamond.component.SettingStorage;
 import com.zhipin.diamond.config.ApplicationConfig;
 import com.zhipin.diamond.config.PluginConfig;
 import com.zhipin.diamond.http.HttpService;
 import com.zhipin.diamond.http.HttpServiceFactory;
+import com.zhipin.diamond.model.ApplicationInfo;
 import com.zhipin.diamond.model.HotfixResult;
 import com.zhipin.diamond.model.Result;
 import okhttp3.MediaType;
@@ -40,19 +40,21 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.junit.rules.Stopwatch;
 import retrofit2.Call;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.zhipin.diamond.constants.DiamondConstants.EMPTY_APPLICATION_LIST_TXT;
 import static com.zhipin.diamond.model.Result.SUCCESS_CODE;
-import static com.zhipin.diamond.utils.Constants.NEED_SELECT_APPLICATION;
-import static com.zhipin.diamond.utils.ReloadUtil.getApplicationList;
+import static com.zhipin.diamond.utils.ReloadUtil.filterApplicationInfoList;
 import static com.zhipin.diamond.utils.ReloadUtil.notifyFailed;
 import static com.zhipin.diamond.utils.ReloadUtil.notifySuccess;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author yinnan@kanzhun.com
@@ -61,9 +63,9 @@ import static com.zhipin.diamond.utils.ReloadUtil.notifySuccess;
 public class HotFixActionUtils {
     private static Logger logger = Logger.getInstance(HotFixActionUtils.class);
 
-    public static void handleHotfixAction(Project project, VirtualFile virtualFile, String applicationName) {
+    public static void handleHotfixAction(Project project, VirtualFile virtualFile, ApplicationConfig applicationConfig) {
         logger.info("Reload action performed");
-        if (project == null || virtualFile == null || applicationName == null) {
+        if (project == null || virtualFile == null || applicationConfig == null || StringUtils.isBlank(applicationConfig.getSelectedApplicationName())) {
             return;
         }
         PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
@@ -73,7 +75,7 @@ public class HotFixActionUtils {
             CompilerManager compilerManager = CompilerManager.getInstance(project);
             VirtualFile[] files = {virtualFile};
             if ("class".equals(virtualFile.getExtension())) {
-                reloadClassFile(project, virtualFile, applicationName);
+                reloadClassFile(project, virtualFile, applicationConfig);
             } else if (!virtualFile.isInLocalFileSystem() && !virtualFile.isWritable()) {
                 // source file in a library
             } else {
@@ -97,7 +99,7 @@ public class HotFixActionUtils {
                         if (outputRoots != null) {
                             result[0] = findClassFile(outputRoots, psiFile);
                         }
-                        reloadClassFile(project, result[0], applicationName);
+                        reloadClassFile(project, result[0], applicationConfig);
                     } else {
                         log("Compile error " + errors);
                     }
@@ -175,22 +177,22 @@ public class HotFixActionUtils {
         });
     }
 
-    private static void reloadClassFile(final Project project, final VirtualFile file, String applicationName) {
+    private static void reloadClassFile(final Project project, final VirtualFile file, ApplicationConfig applicationConfig) {
         log("Sync " + project + ' ' + file);
         if (file == null) {
             return;
         }
         Application application = ApplicationManager.getApplication();
         application.invokeLater(() -> file.refresh(false, false,
-                () -> startReloadTask(project, file, applicationName)));
+                () -> startReloadTask(project, file, applicationConfig)));
     }
 
-    private static void startReloadTask(Project project, VirtualFile file, String applicationName) {
+    private static void startReloadTask(Project project, VirtualFile file, ApplicationConfig applicationConfig) {
         ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Class" + file.getName()) {
             @Override
             public void run(@NotNull ProgressIndicator indicator) {
                 try {
-                    uploadAndReloadClass(project, file, applicationName);
+                    uploadAndReloadClass(project, file, applicationConfig);
                     notifySuccess();
                 } catch (Exception e) {
                     notifyFailed(e.getMessage());
@@ -200,20 +202,21 @@ public class HotFixActionUtils {
         });
     }
 
-    private static void uploadAndReloadClass(final Project project, final VirtualFile file, String applicationName) throws Exception {
-        if (StringUtils.isBlank(applicationName)) {
-            showDialogWithError(project, NEED_SELECT_APPLICATION);
+    private static void uploadAndReloadClass(final Project project, final VirtualFile file, ApplicationConfig applicationConfig) throws Exception {
+        if (Objects.isNull(applicationConfig)
+                || StringUtils.isBlank(applicationConfig.getSelectedApplicationName())) {
+            showDialogWithError(project, EMPTY_APPLICATION_LIST_TXT);
         }
-        Result<HotfixResult> result = doContainerHotfix(file, applicationName);
+        Result<HotfixResult> result = doContainerHotfix(file, applicationConfig);
         checkNotNull(result);
         if (result.getCode() == SUCCESS_CODE) {
             return;
         }
-        boolean success = tryRefreshApplicationList(project, applicationName);
+        boolean success = tryRefreshApplicationList(project, applicationConfig);
         if (!success) {
-            showDialogWithError(project, NEED_SELECT_APPLICATION);
+            showDialogWithError(project, EMPTY_APPLICATION_LIST_TXT);
         }
-        result = doContainerHotfix(file, applicationName);
+        result = doContainerHotfix(file, applicationConfig);
         checkNotNull(result);
         if (result.getCode() == SUCCESS_CODE) {
             return;
@@ -221,20 +224,21 @@ public class HotFixActionUtils {
         throw new RuntimeException(result.getMsg());
     }
 
-    private static Result<HotfixResult> doContainerHotfix(VirtualFile file, String applicationName) throws IOException {
+    private static Result<HotfixResult> doContainerHotfix(VirtualFile file, ApplicationConfig applicationConfig) throws IOException {
         HttpService httpService = HttpServiceFactory.getInstance();
         RequestBody requestBody = RequestBody.create(MediaType.get("multipart/form-data"), file.contentsToByteArray());
-        MultipartBody.Part classFile = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        RequestBody applicationNamePart = RequestBody.create(MediaType.parse("multipart/form-data"), applicationName);
-        Call<Result<HotfixResult>> hotReloadResultCall = httpService.reloadContainerClass(classFile, applicationNamePart);
+        MultipartBody.Part classFile = MultipartBody.Part.createFormData("file", URLEncoder.encode(file.getName(), "UTF-8"), requestBody);
+        RequestBody applicationNamePart = RequestBody.create(MediaType.parse("multipart/form-data"), applicationConfig.getSelectedApplicationName());
+        RequestBody groupPart = RequestBody.create(MediaType.parse("multipart/form-data"), applicationConfig.calculateGroupName());
+        Call<Result<HotfixResult>> hotReloadResultCall = httpService.reloadContainerClass(classFile, applicationNamePart, groupPart);
         return hotReloadResultCall.execute().body();
     }
 
-    private static boolean tryRefreshApplicationList(Project project, String applicationName) {
-        ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
-        List<String> applicationList = getApplicationList();
-        String selectedApplication = applicationList.stream()
-                .filter(meta -> meta.equalsIgnoreCase(applicationName))
+    private static boolean tryRefreshApplicationList(Project project, ApplicationConfig applicationConfig) {
+        List<ApplicationInfo> filterApplicationInfoList = filterApplicationInfoList(applicationConfig);
+        List<String> applicationNameList = filterApplicationInfoList.stream().map(ApplicationInfo::getApplicationName).collect(toList());
+        String selectedApplication = applicationNameList.stream()
+                .filter(meta -> meta.equalsIgnoreCase(applicationConfig.getSelectedApplicationName()))
                 .findFirst()
                 .orElse(null);
         if (StringUtils.isBlank(selectedApplication)) {
@@ -250,9 +254,9 @@ public class HotFixActionUtils {
         throw new RuntimeException(errorMsg);
     }
 
-    public static void handleHotfixSourceAction(Project project, VirtualFile virtualFile, String applicationName) {
+    public static void handleHotfixSourceAction(Project project, VirtualFile virtualFile, ApplicationConfig applicationConfig) {
         logger.info("Reload Source action performed");
-        if (project == null || virtualFile == null || applicationName == null) {
+        if (project == null || virtualFile == null || applicationConfig == null || StringUtils.isBlank(applicationConfig.getSelectedApplicationName())) {
             return;
         }
 
@@ -260,7 +264,7 @@ public class HotFixActionUtils {
         PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
         if (psiFile instanceof PsiClassOwner) {
             if ("class".equals(virtualFile.getExtension())) {
-                reloadClassFile(project, virtualFile, applicationName);
+                reloadClassFile(project, virtualFile, applicationConfig);
             } else if (!virtualFile.isInLocalFileSystem() && !virtualFile.isWritable()) {
                 // source file in a library
             } else {
@@ -268,29 +272,39 @@ public class HotFixActionUtils {
                 application.runWriteAction(() -> FileDocumentManager.getInstance().saveAllDocuments());
                 Document currentDoc = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
                 VirtualFile currentFile = FileDocumentManager.getInstance().getFile(currentDoc);
-                reloadSourceFile(project, currentFile, applicationName);
+                reloadSourceFile(project, currentFile, applicationConfig);
             }
         }
+//        if (psiFile instanceof PsiPlainTextFile) {
+//            if ("sql".equals(virtualFile.getExtension())) {
+//                Application application = ApplicationManager.getApplication();
+//                application.runWriteAction(() -> FileDocumentManager.getInstance().saveAllDocuments());
+//                Document currentDoc = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
+//                VirtualFile currentFile = FileDocumentManager.getInstance().getFile(currentDoc);
+//                reloadSourceFile(project, currentFile, applicationName);
+//            }
+//        }
     }
 
-    private static void reloadSourceFile(final Project project, final VirtualFile file, String applicationName) {
+    private static void reloadSourceFile(final Project project, final VirtualFile file, ApplicationConfig applicationConfig) {
         log("Sync Source " + project + ' ' + file);
         if (file == null) {
             return;
         }
         Application application = ApplicationManager.getApplication();
         application.invokeLater(() -> file.refresh(false, false,
-                () -> startReloadSourceTask(project, file, applicationName)));
+                () -> startReloadSourceTask(project, file, applicationConfig)));
     }
 
 
-    private static void startReloadSourceTask(Project project, VirtualFile file, String applicationName) {
-        ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Source "  + file.getName()) {
+    private static void startReloadSourceTask(Project project, VirtualFile file, ApplicationConfig applicationConfig) {
+        ProgressManager.getInstance().run(new Backgroundable(project, "Uploading Source " + file.getName()) {
             long timeMillis = System.currentTimeMillis();
+
             @Override
             public void run(@NotNull ProgressIndicator indicator) {
                 try {
-                    uploadAndReloadClass(project, file, applicationName);
+                    uploadAndReloadClass(project, file, applicationConfig);
                     notifySuccess();
                 } catch (Exception e) {
                     notifyFailed(e.getMessage());

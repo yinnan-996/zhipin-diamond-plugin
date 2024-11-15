@@ -1,18 +1,13 @@
 package com.zhipin.diamond.component;
 
-import com.intellij.openapi.options.Configurable.VariableProjectAppLevel;
-import com.intellij.openapi.project.Project;
-import com.zhipin.diamond.model.HotFixAction;
-import com.zhipin.diamond.utils.HotFixActionUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import com.zhipin.diamond.config.ApplicationConfig;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-
-import java.util.concurrent.ConcurrentLinkedDeque;
+import com.intellij.openapi.options.Configurable.VariableProjectAppLevel;
+import com.intellij.openapi.project.Project;
+import com.zhipin.diamond.config.ApplicationConfig;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author yinnan@kanzhun.com
@@ -42,6 +37,7 @@ public class SettingStorage implements PersistentStateComponent<ApplicationConfi
         SettingStorage settingStorage = project.getComponent(SettingStorage.class);
         return settingStorage.getState();
     }
+
     @Override
     public boolean isProjectLevel() {
         return true;

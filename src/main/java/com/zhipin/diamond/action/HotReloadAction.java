@@ -13,7 +13,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.zhipin.diamond.component.SettingStorage;
 import com.zhipin.diamond.config.ApplicationConfig;
 import com.zhipin.diamond.config.PluginConfig;
-import com.zhipin.diamond.model.HotFixAction;
+import com.zhipin.diamond.model.ApplicationInfo;
 import com.zhipin.diamond.utils.HotFixActionUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
@@ -21,16 +21,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.zhipin.diamond.utils.ReloadUtil.getApplicationList;
+import static com.zhipin.diamond.utils.ReloadUtil.filterApplicationInfoList;
 import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * @author yinnan@kanzhun.com
  * @date 2023/8/18 11:59
  */
-public class HotReloadAction  extends AnAction {
+public class HotReloadAction extends AnAction {
 
     private Logger logger = Logger.getInstance(HotReloadAction.class);
 
@@ -39,18 +38,9 @@ public class HotReloadAction  extends AnAction {
         VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         Project project = e.getData(CommonDataKeys.PROJECT);
         assert project != null;
-        List<String> applicationNameList = getApplicationList();
-        if (isEmpty(applicationNameList)) {
-            return;
-        }
         ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
-        String applicationNameKeyword = applicationConfig.getApplicationNameKeyword();
-        if (isNotBlank(applicationNameKeyword)) {
-            String lowerCase = applicationNameKeyword.toLowerCase();
-            applicationNameList = applicationNameList.stream()
-                    .filter(application -> application.toLowerCase().contains(lowerCase))
-                    .collect(toList());
-        }
+        List<ApplicationInfo> filterApplicationInfoList = filterApplicationInfoList(applicationConfig);
+        List<String> applicationNameList = filterApplicationInfoList.stream().map(ApplicationInfo::getApplicationName).distinct().collect(toList());
         if (CollectionUtils.isEmpty(applicationNameList)) {
             ApplicationManager.getApplication().invokeLater(
                     () -> ShowSettingsUtil.getInstance().showSettingsDialog(project, PluginConfig.class));
@@ -63,9 +53,11 @@ public class HotReloadAction  extends AnAction {
         JBPopupFactory instance = JBPopupFactory.getInstance();
         IPopupChooserBuilder<String> popupChooserBuilder = instance.createPopupChooserBuilder(applicationNameList)
                 .setItemChosenCallback(applicationName -> {
-            applicationConfig.setSelectedApplicationName(applicationName);
-            HotFixActionUtils.handleHotfixAction(project, virtualFile, applicationName);
-        }).setTitle("Select One Application");
+                    applicationConfig.setSelectedApplicationName(applicationName);
+                    HotFixActionUtils.handleHotfixAction(project, virtualFile, applicationConfig);
+                }).setTitle("Select One Application");
         popupChooserBuilder.createPopup().showInFocusCenter();
     }
+
+
 }

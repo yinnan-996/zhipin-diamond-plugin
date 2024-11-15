@@ -1,20 +1,12 @@
 package com.zhipin.diamond.config;
 
-import javax.swing.JComponent;
-
-import com.intellij.openapi.options.Configurable.VariableProjectAppLevel;
+import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.roots.ui.configuration.ModulesConfigurator;
-import com.intellij.openapi.roots.ui.configuration.ProjectConfigurable;
-import com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectSdksModel;
-import com.intellij.openapi.roots.ui.configuration.projectRoot.StructureConfigurableContext;
+import com.zhipin.diamond.component.SettingPanel;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
-import com.zhipin.diamond.component.SettingPanel;
-import com.zhipin.diamond.component.SettingStorage;
-import com.intellij.openapi.options.Configurable;
+import javax.swing.*;
 
 /**
  * @author yinnan@kanzhun.com

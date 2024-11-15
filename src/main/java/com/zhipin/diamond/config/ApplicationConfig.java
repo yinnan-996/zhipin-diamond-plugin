@@ -1,12 +1,5 @@
 package com.zhipin.diamond.config;
 
-import static com.zhipin.diamond.utils.ReloadUtil.joinKeywords;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-
-import java.util.List;
-
-import com.zhipin.diamond.model.JvmProcess;
-
 import lombok.Data;
 
 
@@ -18,4 +11,11 @@ import lombok.Data;
 public class ApplicationConfig {
     private String applicationNameKeyword;
     private String selectedApplicationName;
+    private boolean enableGroup;
+    private String groupName;
+    private boolean disableLocalCompile;
+
+    public String calculateGroupName() {
+        return enableGroup ? groupName : "";
+    }
 }

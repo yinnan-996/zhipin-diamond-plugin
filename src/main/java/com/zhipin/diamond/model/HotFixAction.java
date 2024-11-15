@@ -1,6 +1,5 @@
 package com.zhipin.diamond.model;
 
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import lombok.AllArgsConstructor;

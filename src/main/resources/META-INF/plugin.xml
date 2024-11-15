@@ -23,9 +23,20 @@
      使用方式：你可以鼠标右键并且在 Hot Reload子菜单上选择你要热更新的应用，然后等待几秒，应用就完成了热更新
   ]]></description>
 
-    <idea-version since-build="193" />
+    <idea-version since-build="193" until-build="243.*"/>
 
     <change-notes><![CDATA[
+         <p> 2.1 RELEASE
+            <ul>
+                <li>支持分组过滤</li>
+                <li>支持关闭本地编译推送热更新</li>
+            </ul>
+        </p>
+         <p> 2.0 RELEASE
+            <ul>
+                <li>支持idea 2024.x版本</li>
+            </ul>
+        </p>
          <p> 1.9 RELEASE
             <ul>
                 <li>远端编译更新前先保存选择文件，解决出现热更不起效的问题</li>
@@ -85,7 +96,6 @@
     </extensions>
 
 
-
     <project-components>
         <component>
             <implementation-class>com.zhipin.diamond.component.SettingStorage</implementation-class>
@@ -100,7 +110,8 @@
 
     <actions>
 
-        <group id="hotReloadSourceGroup" class="com.zhipin.diamond.action.HotReloadSourceActionGroup" text="Hot Reload Source"
+        <group id="hotReloadSourceGroup" class="com.zhipin.diamond.action.HotReloadSourceActionGroup"
+               text="Hot Reload Source"
                description="Hot reload Source" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>

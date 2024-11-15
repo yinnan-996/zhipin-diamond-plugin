@@ -10,15 +10,16 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.zhipin.diamond.component.SettingStorage;
 import com.zhipin.diamond.config.ApplicationConfig;
 import com.zhipin.diamond.config.PluginConfig;
+import com.zhipin.diamond.model.ApplicationInfo;
 import com.zhipin.diamond.utils.HotFixActionUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.List;
 
-import static com.zhipin.diamond.utils.ReloadUtil.getApplicationList;
+import static com.zhipin.diamond.constants.DiamondConstants.EMPTY_APPLICATION_LIST_TXT;
+import static com.zhipin.diamond.utils.ReloadUtil.filterApplicationInfoList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -37,19 +38,10 @@ public class HotReloadSourceActionGroup extends ActionGroup {
         VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         Project project = e.getData(CommonDataKeys.PROJECT);
         assert project != null;
-        List<String> applicationNameList = getApplicationList();
-        if (isEmpty(applicationNameList)) {
-            return new AnAction[]{SHOW_CONFIG_ACTION};
-        }
         ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
-        String applicationNameKeyword = applicationConfig.getApplicationNameKeyword();
-        if (isNotBlank(applicationNameKeyword)) {
-            String lowerCase = applicationNameKeyword.toLowerCase();
-            applicationNameList = applicationNameList.stream()
-                    .filter(application -> application.toLowerCase().contains(lowerCase))
-                    .collect(toList());
-        }
-        if (CollectionUtils.isEmpty(applicationNameList)) {
+        List<ApplicationInfo> filterApplicationInfoList = filterApplicationInfoList(applicationConfig);
+        List<String> applicationNameList = filterApplicationInfoList.stream().map(ApplicationInfo::getApplicationName).collect(toList());
+        if (isEmpty(applicationNameList)) {
             return new AnAction[]{SHOW_CONFIG_ACTION};
         }
         if (isNotBlank(applicationConfig.getSelectedApplicationName())) {
@@ -62,6 +54,12 @@ public class HotReloadSourceActionGroup extends ActionGroup {
 
     private AnAction buildAction(Project project, VirtualFile virtualFile, String applicationName) {
         return new HotReloadSourceChildrenAction(project, virtualFile, applicationName);
+    }
+
+
+    @Override
+    public boolean hideIfNoVisibleChildren() {
+        return true;
     }
 
     public static final class HotReloadSourceChildrenAction extends AnAction {
@@ -83,14 +81,14 @@ public class HotReloadSourceActionGroup extends ActionGroup {
         public void actionPerformed(@NotNull AnActionEvent e) {
             ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
             applicationConfig.setSelectedApplicationName(applicationName);
-            HotFixActionUtils.handleHotfixSourceAction(project, virtualFile, applicationName);
+            HotFixActionUtils.handleHotfixSourceAction(project, virtualFile, applicationConfig);
         }
     }
 
     public static final class ShowConfigAction extends AnAction {
 
         public ShowConfigAction() {
-            super("Application Is Empty,Please Check ServerUrl or ApplicationNameKeyword");
+            super(EMPTY_APPLICATION_LIST_TXT);
         }
 
         @Override
