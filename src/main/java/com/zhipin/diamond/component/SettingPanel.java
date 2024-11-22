@@ -84,6 +84,7 @@ public class SettingPanel {
             ApplicationConfig applicationConfig = SettingStorage.getApplicationConfig(project);
             checkArgument(Objects.equals(applicationNameBox.getSelectedItem(), applicationConfig.getSelectedApplicationName()));
             checkArgument(Objects.equals(applicationNameKeywordField.getText(), applicationConfig.getApplicationNameKeyword()));
+            checkArgument(Objects.equals(serverUrlField.getText(), ServerUrlSettingStorage.getServerUrl()));
             checkArgument(Objects.equals(enableGroupBox.getSelectedItem(), applicationConfig.isEnableGroup()));
             checkArgument(Objects.equals(disableLocalCompileBox.getSelectedItem(), applicationConfig.isDisableLocalCompile()));
             checkArgument(Objects.equals(groupNameField.getText(), applicationConfig.getGroupName()));
@@ -212,8 +213,6 @@ public class SettingPanel {
         } else {
             filterApplicationList.stream().map(ApplicationInfo::getApplicationName).forEach(applicationNameBox::addItem);
         }
-        applicationNameBox.addItem(EMPTY_APPLICATION_LIST_TXT);
-        applicationNameBox.setSelectedIndex(0);
     }
 
 }
