@@ -23,9 +23,14 @@
      使用方式：你可以鼠标右键并且在 Hot Reload子菜单上选择你要热更新的应用，然后等待几秒，应用就完成了热更新
   ]]></description>
 
-    <idea-version since-build="193" until-build="243.*"/>
+    <idea-version since-build="193" until-build="253.*"/>
 
     <change-notes><![CDATA[
+         <p> 2.2 RELEASE
+            <ul>
+                <li>支持idea 2025.x版本</li>
+            </ul>
+        </p>
          <p> 2.1 RELEASE
             <ul>
                 <li>支持分组过滤</li>

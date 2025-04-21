@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/component/SettingPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +112,10 @@
     <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/dependency-management/src/main/java/org/gradle/api/internal/artifacts/BaseRepositoryFactory.java" root0="SKIP_INSPECTION" />
     <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/dependency-management/src/main/java/org/gradle/api/internal/artifacts/dsl/DefaultRepositoryHandler.java" root0="SKIP_INSPECTION" />
   </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -158,7 +163,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.zhipin.diamond.config.PluginConfig&quot;,
@@ -359,7 +364,11 @@
       <workItem from="1731651432911" duration="5820000" />
       <workItem from="1731658411208" duration="500000" />
       <workItem from="1731658920635" duration="1336000" />
-      <workItem from="1732271342650" duration="190000" />
+      <workItem from="1732271342650" duration="264000" />
+      <workItem from="1735203040496" duration="1403000" />
+      <workItem from="1735204533066" duration="331000" />
+      <workItem from="1742455635381" duration="3688000" />
+      <workItem from="1745226030325" duration="70000" />
     </task>
     <servers />
   </component>
