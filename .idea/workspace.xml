@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d3786b-d884-46c1-865b-b14e7a9d74f7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
@@ -76,11 +77,14 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-1.9" />
+        <entry key="$PROJECT_DIR$" value="feature-2.1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;editorReviewEnabled&quot;: false
+}</component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
       <RecentBranches>
@@ -106,6 +110,11 @@
       </RecentBranches>
     </option>
   </component>
+  <component name="GitlabMajeraCodeReviewSettings">
+    <option name="popularEmojiShortcuts">
+      <list />
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2020.3.1/f246292bd73ac11c57f9d4fd35e0b9bb3add4d08/ideaIC-2020.3.1/lib/platform-api.jar!/com/intellij/openapi/components/PersistentStateComponent.class" root0="SKIP_INSPECTION" />
     <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/d04a0346b551dc9a33113ec1b389e99d/transformed/unzipped-distribution/gradle-8.1.1/subprojects/core-api/src/main/java/org/gradle/api/artifacts/dsl/RepositoryHandler.java" root0="SKIP_INSPECTION" />
@@ -126,6 +135,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -140,36 +153,41 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Run Plugin.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.zhipin-diamond-plugin [buildPlugin].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.zhipin-diamond-plugin [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.zhipin-diamond-plugin [init].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.zhipin-diamond-plugin [runIde].executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.zhipin-diamond-plugin [setupDependencies].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;346&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;534&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-2.1&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/admin/work/gitHub/zhipin-diamond-plugin/src/main/java/com/zhipin/diamond/model&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.zhipin.diamond.config.PluginConfig&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Run Plugin.executor": "Run",
+    "Gradle.zhipin-diamond-plugin [buildPlugin].executor": "Run",
+    "Gradle.zhipin-diamond-plugin [clean].executor": "Run",
+    "Gradle.zhipin-diamond-plugin [init].executor": "Run",
+    "Gradle.zhipin-diamond-plugin [runIde].executor": "Debug",
+    "Gradle.zhipin-diamond-plugin [setupDependencies].executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "346",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "534",
+    "WebServerToolWindowFactoryState": "false",
+    "android.gradle.sync.needed": "true",
+    "git-widget-placeholder": "feature-2.2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/admin/work/gitHub/zhipin-diamond-plugin/src/main/java/com/zhipin/diamond/model",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "com.zhipin.diamond.config.PluginConfig",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/zhipin/diamond/model" />
@@ -181,7 +199,7 @@
       <recent name="com.zhipin.diamond.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.zhipin-diamond-plugin [buildPlugin]">
+  <component name="RunManager" selected="Gradle.zhipin-diamond-plugin [clean]">
     <configuration name="zhipin-diamond-plugin [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -200,8 +218,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="zhipin-diamond-plugin [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -222,8 +243,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="zhipin-diamond-plugin [init]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -244,8 +268,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="zhipin-diamond-plugin [runIde]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -266,15 +293,12 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="zhipin-diamond-plugin" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="zhipin-diamond-plugin" />
@@ -286,24 +310,24 @@
     <list>
       <item itemvalue="Gradle.Run Plugin" />
       <item itemvalue="Gradle.zhipin-diamond-plugin [buildPlugin]" />
-      <item itemvalue="Gradle.zhipin-diamond-plugin [init]" />
       <item itemvalue="Gradle.zhipin-diamond-plugin [clean]" />
+      <item itemvalue="Gradle.zhipin-diamond-plugin [init]" />
       <item itemvalue="Gradle.zhipin-diamond-plugin [runIde]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.zhipin-diamond-plugin [clean]" />
         <item itemvalue="Gradle.zhipin-diamond-plugin [buildPlugin]" />
         <item itemvalue="Gradle.zhipin-diamond-plugin [runIde]" />
         <item itemvalue="Gradle.zhipin-diamond-plugin [init]" />
-        <item itemvalue="Gradle.zhipin-diamond-plugin [clean]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
       </set>
     </attachedChunks>
   </component>
@@ -368,7 +392,11 @@
       <workItem from="1735203040496" duration="1403000" />
       <workItem from="1735204533066" duration="331000" />
       <workItem from="1742455635381" duration="3688000" />
-      <workItem from="1745226030325" duration="70000" />
+      <workItem from="1745226030325" duration="1423000" />
+      <workItem from="1747730610083" duration="1454000" />
+      <workItem from="1751435010359" duration="4000" />
+      <workItem from="1769351419046" duration="38000" />
+      <workItem from="1773279145831" duration="106000" />
     </task>
     <servers />
   </component>
@@ -412,7 +440,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/zhipin/diamond/utils/HotFixActionUtils.java</url>
           <line>65</line>
-          <properties class="com.zhipin.diamond.utils.HotFixActionUtils" method="handleHotfixAction">
+          <properties class="com.zhipin.diamond.utils.HotFixActionUtils">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
